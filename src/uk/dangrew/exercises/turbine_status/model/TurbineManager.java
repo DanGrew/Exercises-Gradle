@@ -1,8 +1,12 @@
 package uk.dangrew.exercises.turbine_status.model;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
 import java.util.TreeMap;
+
+import static java.util.Collections.unmodifiableCollection;
 
 /**
  * Provides a simplistic mechanism for managing {@link Turbine}s, to be thought of the most simple database.
@@ -34,5 +38,9 @@ public class TurbineManager {
       Turbine turbine = new Turbine(identifier);
       turbines.put(turbine.getIdentifier(), turbine);
       return Optional.of(turbine);
+   }
+
+   public Collection<Turbine> getAll() {
+      return unmodifiableCollection(turbines.values());
    }
 }

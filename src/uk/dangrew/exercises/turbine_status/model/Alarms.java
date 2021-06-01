@@ -1,17 +1,18 @@
 package uk.dangrew.exercises.turbine_status.model;
 
-import java.util.EnumMap;
-import java.util.Map;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableMap;
+import uk.dangrew.exercises.turbine_status.events.AlarmListener;
 
 /**
  * Encapsulates the alarm data associated with a turbine.
  */
 public class Alarms {
 
-   private final Map<AlarmLevel, Integer> alarms;
+   private final ObservableMap<AlarmLevel, Integer> alarms;
 
    public Alarms() {
-      this.alarms = new EnumMap<>(AlarmLevel.class);
+      this.alarms = FXCollections.observableHashMap();
    }
 
    /**
@@ -33,5 +34,9 @@ public class Alarms {
 
    public int getAlarmCountFor(AlarmLevel level) {
       return alarms.getOrDefault(level, 0);
+   }
+   
+   public void addAlarmListener(AlarmListener listener){
+      alarms.addListener(listener);
    }
 }
